@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>User Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>User List</h1>
+    <a href="#">Create New User</a>
+    <br/><br/>
+    <b>UserList : ${userList}</b>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.id}">Product ID</td>
+                <td th:text="${user.firstName}">Name</td>
+                <td th:text="${user.lastName}">Brand</td>
+                <td th:text="${user.email}">Made in</td>
+                <td>
+                    <a th:href="/@{'/edit/' + ${user.id}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="/@{'/delete/' + ${user.id}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+</html>

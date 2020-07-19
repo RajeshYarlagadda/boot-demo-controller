@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
@@ -22,12 +23,20 @@ public class MVCController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@RequestMapping("/userListing")
+	@GetMapping({"/","/userListing"})
 	public String viewUserListing(Model model) {
 		
-		List<User> userList = userRepository.findAll();
-		log.info("userList "+userList);
-		model.addAttribute("userList",userList);
+		List<User> userList = new ArrayList<User>(); 
+				//userRepository.findAll();
+		//log.info("userList "+userList);
+		//model.addAttribute("userList",userList);
+		User user = new User();
+		user.setId(1L);
+		user.setFirstName("Rajesh");
+		user.setLastName("Y");
+		user.setEmail("rajesh@gmail.com");		 
+		userList.add(user);
+				model.addAttribute("userList",userList);
 		return "UserListing";		
 	}
 }
